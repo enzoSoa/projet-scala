@@ -2,13 +2,14 @@ package progfun.builders
 
 import progfun.types.Limits
 import progfun.exceptions.InputFormatException
+import scala.util.{Failure, Success, Try}
 
 object LimitsBuilder {
-  def fromInput(input: String): Either[InputFormatException, Limits] =
+  def fromInput(input: String): Try[Limits] =
     input.split(" ").toList match {
-      case first :: second :: _ => Right(Limits(first.toInt, second.toInt))
+      case first :: second :: _ => Success(Limits(first.toInt, second.toInt))
       case _ =>
-        Left(
+        Failure(
           new InputFormatException(
             "Input file must start with 2 int indicating the garden size with this format 'x y'"
           )
