@@ -1,10 +1,11 @@
 package fr.esgi.al.funprog
 
-object Main extends App {
-  println("Ici le programme principal")
-  // Le code suivant ne compilera pas.
-  // var tmp = null;
-  // var tmp2 = if (tmp == 1) "yes" else 1
+import progfun.InputParser
 
-  // println(s"tmp: $tmp, tmp2: $tmp2")
+object Main extends App {
+  val instructions = InputParser.execute()
+  instructions match {
+    case Right(value)    => print(value)
+    case Left(exception) => print(exception.toString())
+  }
 }
