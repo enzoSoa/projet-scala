@@ -5,6 +5,10 @@ case class Location(x: Int, y: Int) {
     f"${"    " * (indent + 1)}\"x\": $x,\n" +
     f"${"    " * (indent + 1)}\"y\": $y\n" +
     f"${"    " * indent}}"
+
+  def toYaml(indent: Int) = f"\n" +
+    f"${"  " * indent}x: $x\n" +
+    f"${"  " * indent}y: $y\n"
 }
 
 case class Position(point: Location, direction: String) {
@@ -12,6 +16,10 @@ case class Position(point: Location, direction: String) {
     f"${"    " * (indent + 1)}\"point\": ${point.toJson(indent + 1)},\n" +
     f"${"    " * (indent + 1)}\"direction\": \"$direction\"\n" +
     f"${"    " * indent}}"
+
+  def toYaml(indent: Int) = f"\n" +
+    f"${"  " * indent}point: ${point.toYaml(indent + 1)}\n" +
+    f"${"  " * indent}direction: $direction\n"
 }
 
 case class Trimmer(debut: Position, instructions: List[String])
@@ -25,4 +33,12 @@ case class ProcessedTrimmer(
     f"${"    " * (indent + 1)}\"direction\": [${instructions.mkString(",")}],\n" +
     f"${"    " * (indent + 1)}\"fin\": ${fin.toJson(indent + 1)}\n" +
     f"${"    " * indent}}"
+
+  def toYaml(indent: Int) =
+    f"debut: ${debut.toYaml(indent + 2)}\n" +
+      f"${"  " * (indent + 1)}instructions:\n" +
+      instructions
+        .map(instruction => f"${"  " * (indent + 2)}- $instruction")
+        .mkString("\n") + "\n" +
+      f"${"  " * (indent + 1)}fin: ${fin.toYaml(indent + 2)}\n"
 }
