@@ -2,6 +2,7 @@ package fr.esgi.al.funprog
 
 import progfun.{GardeningEngine, InputParser}
 import scala.util.{Failure, Success, Try}
+import progfun.OutputEngine
 // import scala.util.{Failure, Success, Try}
 
 object Main extends App {
@@ -10,7 +11,7 @@ object Main extends App {
       case Success(instructions) =>
         GardeningEngine.execute(instructions) match {
           case Failure(exception) => Failure(exception)
-          case Success(value)     => Success(value.toString())
+          case Success(value)     => Success(OutputEngine.execute(value))
         }
       case Failure(exception) => {
         Failure(exception)
