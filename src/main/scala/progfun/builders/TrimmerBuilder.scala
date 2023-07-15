@@ -1,10 +1,13 @@
 package progfun.builders
 
 import progfun.exceptions.InputFormatException
-import progfun.types.{Location, Position, Trimmer}
+import progfun.types.{Location, Position, ProcessedTrimmer, Trimmer}
 import scala.util.{Failure, Success, Try}
 
 object TrimmerBuilder {
+  def process(trimmer: Trimmer, endPosition: Position): ProcessedTrimmer =
+    ProcessedTrimmer(trimmer.debut, trimmer.instructions, endPosition)
+
   def fromInput(input: List[String]): Try[List[Trimmer]] =
     input.grouped(2).toList match {
       case inputs if inputs.length > 0 => parseInputs(inputs)

@@ -1,3 +1,5 @@
 5 5
 4 4 N
-AAAGD
+AAGAA
+1 2 E
+GGA
