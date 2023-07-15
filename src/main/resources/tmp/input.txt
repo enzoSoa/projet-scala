@@ -1,5 +1,5 @@
 5 5
 4 4 N
-AAGAAA
+AAGAA
 1 2 E
-GG
+GGA
