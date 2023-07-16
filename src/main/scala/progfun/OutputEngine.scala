@@ -18,7 +18,7 @@ object OutputEngine {
       case Failure(exception) => Failure(exception)
       case Success(fileLocation) => {
         val file = File(fileLocation)
-        Try(file.createFileIfNotExists().appendText(result)) match {
+        Try(file.createFileIfNotExists().write(result)) match {
           case Failure(_) =>
             Failure(
               new OutputEngineException(

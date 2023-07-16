@@ -8,5 +8,5 @@ case class Limits(x: Int, y: Int) {
 
   def toYaml(indent: Int) = f"\n" +
     f"${"  " * indent}x: $x\n" +
-    f"${"  " * indent}y: $y\n"
+    f"${"  " * indent}y: $y"
 }
