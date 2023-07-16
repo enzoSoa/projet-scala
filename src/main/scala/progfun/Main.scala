@@ -11,7 +11,7 @@ object Main extends App {
       case Success(instructions) =>
         GardeningEngine.execute(instructions) match {
           case Failure(exception) => Failure(exception)
-          case Success(value)     => Success(OutputEngine.execute(value))
+          case Success(value)     => OutputEngine.execute(value)
         }
       case Failure(exception) => {
         Failure(exception)
