@@ -9,6 +9,8 @@ case class Location(x: Int, y: Int) {
   def toYaml(indent: Int) = f"\n" +
     f"${"  " * indent}x: $x\n" +
     f"${"  " * indent}y: $y\n"
+
+  def toCsv() = f"$x;$y"
 }
 
 case class Position(point: Location, direction: String) {
@@ -20,6 +22,8 @@ case class Position(point: Location, direction: String) {
   def toYaml(indent: Int) = f"\n" +
     f"${"  " * indent}point: ${point.toYaml(indent + 1)}\n" +
     f"${"  " * indent}direction: $direction\n"
+
+  def toCsv() = f"${point.toCsv()};$direction"
 }
 
 case class Trimmer(debut: Position, instructions: List[String])
@@ -41,4 +45,6 @@ case class ProcessedTrimmer(
         .map(instruction => f"${"  " * (indent + 2)}- $instruction")
         .mkString("\n") + "\n" +
       f"${"  " * (indent + 1)}fin: ${fin.toYaml(indent + 2)}\n"
+
+  def toCsv() = f"${debut.toCsv()};${fin.toCsv()};${instructions.mkString("")}"
 }

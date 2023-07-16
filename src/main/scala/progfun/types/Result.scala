@@ -16,4 +16,10 @@ case class Result(limite: Limits, tondeuses: List[ProcessedTrimmer]) {
     f"${tondeuses
         .map(tondeuse => f"${"  " * (indent + 1)}- ${tondeuse.toYaml(indent + 1)}")
         .mkString("\n")}\n"
+
+  def toCsv() =
+    f"numéro;début_x;début_y;début_direction;fin_x;fin_y;fin_direction;instructions\n" +
+      tondeuses.zipWithIndex
+        .map { case (tondeuse, index) => f"${index + 1};" + tondeuse.toCsv() }
+        .mkString("\n")
 }
